@@ -65,8 +65,8 @@ var Waypoint = function (_React$Component) {
   }
 
   _createClass(Waypoint, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'UNSAFE_componentWillMount',
+    value: function UNSAFE_componentWillMount() {
       if (this.props.scrollableParent) {
         // eslint-disable-line react/prop-types
         throw new Error('The `scrollableParent` prop has changed name ' + 'to `scrollableAncestor`.');

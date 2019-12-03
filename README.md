@@ -13,6 +13,7 @@ Inspired by [Waypoints][waypoints], except this little library grooves the
 [React][react] way.
 
 ## Demo
+
 ![Demo of React Waypoint in action](https://raw.github.com/brigade/react-waypoint/master/react-waypoint-demo.gif)
 
 [View demo page][demo-page]
@@ -32,7 +33,7 @@ npm install react-waypoint --save
 ## Usage
 
 ```javascript
-var Waypoint = require('react-waypoint');
+var Waypoint = require("react-waypoint");
 ```
 
 ```javascript
@@ -55,10 +56,7 @@ time it is updated as long as it stays visible (e.g. for infinite scroll). You
 can then use a `key` prop to control when a waypoint is reused vs. re-created.
 
 ```javascript
-<Waypoint
-  key={cursor}
-  onEnter={this._loadMoreContent}
-/>
+<Waypoint key={cursor} onEnter={this._loadMoreContent} />
 ```
 
 Alternatively, you can also use an `onPositionChange` event to just get
@@ -66,11 +64,8 @@ notified when the waypoint's position (e.g. inside the viewport, above or
 below) has changed.
 
 ```javascript
-<Waypoint
-  onPositionChange={this._handlePositionChange}
-/>
+<Waypoint onPositionChange={this._handlePositionChange} />
 ```
-
 
 ### Example: [JSFiddle Example][jsfiddle-example]
 
@@ -178,7 +173,8 @@ destructuring](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Op
 this means that you can use waypoints in the following way:
 
 ```jsx
-<Waypoint onEnter={({ previousPosition, currentPosition, event }) => {
+<Waypoint
+  onEnter={({ previousPosition, currentPosition, event }) => {
     // do something useful!
   }}
 />
@@ -188,7 +184,8 @@ If you are more familiar with plain old js functions, you'll do something like
 this:
 
 ```jsx
-<Waypoint onEnter={function(props) {
+<Waypoint
+  onEnter={function(props) {
     // here you can use `props.currentPosition`, `props.previousPosition`, and
     // `props.event`
   }}
@@ -243,7 +240,7 @@ first scrollable ancestor of the Waypoint.
 If that algorithm doesn't work for your use case, then you might find the
 `scrollableAncestor` prop useful. It allows you to specify what the scrollable
 ancestor is. Pass a node as that prop, and the Waypoint will use the scroll
-position of *that* node, rather than its first scrollable ancestor.
+position of _that_ node, rather than its first scrollable ancestor.
 
 #### Example Usage
 
@@ -264,6 +261,7 @@ This might look something like:
 ```
 
 ## Throttling
+
 By default, waypoints will trigger on every scroll event. In most cases, this
 works just fine. But if you find yourself wanting to tweak the scrolling
 performance, the `throttleHandler` prop can come in handy. You pass in a
@@ -272,9 +270,9 @@ in. Here's an example using
 [lodash.throttle](https://www.npmjs.com/package/lodash.throttle):
 
 ```jsx
-import throttle from 'lodash.throttle';
+import throttle from "lodash.throttle";
 
-<Waypoint throttleHandler={(scrollHandler) => throttle(scrollHandler, 100)} />
+<Waypoint throttleHandler={scrollHandler => throttle(scrollHandler, 100)} />;
 ```
 
 The argument passed in to the throttle handler function, `scrollHandler`, is
@@ -286,11 +284,12 @@ after the waypoint is unmounted, it's a good idea to cancel the throttle
 function on unmount:
 
 ```jsx
-import throttle from 'lodash.throttle';
+import throttle from "lodash.throttle";
 
 let throttledHandler;
 
-<Waypoint throttleHandler={(scrollHandler) => {
+<Waypoint
+  throttleHandler={scrollHandler => {
     throttledHandler = throttle(scrollHandler, 100);
     return throttledHandler;
   }}
@@ -299,10 +298,11 @@ let throttledHandler;
       throttledHandler.cancel();
     }
   }}
-/>
+/>;
 ```
 
 ## Troubleshooting
+
 If your waypoint isn't working the way you expect it to, there are a few ways
 you can debug your setup.
 
@@ -310,6 +310,7 @@ OPTION 1: Add the `debug={true}` prop to your waypoint. When you do, you'll see 
 logs informing you about the internals of the waypoint.
 
 OPTION 2: Clone and modify the project locally.
+
 - clone this repo
 - add `console.log` or breakpoints where you think it would be useful.
 - `npm link` in the react-waypoint repo.
@@ -351,3 +352,9 @@ Thanks to the creator of the original Waypoints library,
 [MIT][mit-license]
 
 [mit-license]: ./LICENSE
+
+### Compatibility Updates
+
+This repo has been forked and the following changes have been made;
+
+- Compatibility changes for React 16.11.0; Added `UNSAFE_` tag for outdated lifecycles
